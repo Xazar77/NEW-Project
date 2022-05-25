@@ -1,35 +1,55 @@
 'use strict';
 
 
-let title = prompt('Как называется ваш проект?', ''),
-    screens = prompt('Какие типы экранов нужно разработать?', 'Простые, Сложные, Интерактивные'),
-    screenPrice = +prompt('Сколько будет стоить данная работа?', '12000'),
-    rollback = 100,
+let title = prompt('Как называется ваш проект?'),
+    screens = prompt('Какие типы экранов нужно разработать?'),
+    screenPrice = +prompt('Сколько будет стоить данная работа?'),
+    rollback = 30,
     adaptive = confirm('Нужен ли адаптив на сайте?'),
-    service1 = prompt('Какой дополнительный тип услуги нужен?', ''),
-    servicePrice1 = +prompt('Сколько это будет стоить?', ''),    
-    service2 = prompt('Какой дополнительный тип услуги нужен?', ''),
-    servicePrice2 = +prompt('Сколько это будет стоить?', ''),
-    fullPrice = screenPrice + servicePrice1 + servicePrice2,
-    servicePercentPrice = Math.ceil(fullPrice - (fullPrice * (rollback / 100)));
+    service1 = prompt('Какой дополнительный тип услуги нужен?'),
+    servicePrice1 = +prompt('Сколько это будет стоить?'),
+    service2 = prompt('Какой дополнительный тип услуги нужен?'),
+    servicePrice2 = +prompt('Сколько это будет стоить?');
 
-alert('Hello World!!!');
+let allServicePrices,
+    fullPrice,
+    servicePercentPrice;
 
-console.log('Я изучаю JS');
 
-console.log(title);
-console.log(typeof fullPrice);
-console.log(typeof adaptive);
 
-console.log(screens.length);
 
-console.log('Стоимость верстки экранов ' + screenPrice + ' рублей/ долларов/гривен/юани');
-console.log('Стоимость разработки сайта ' + fullPrice + ' рублей/ долларов/гривен/юани');
 
-screens = screens.toLowerCase();
-console.log(screens.split(','));
+const getAllServicePrices = () => {
+    return servicePrice1 + servicePrice2;
+};
 
-console.log('Процент отката посреднику за работу ' + (fullPrice * (rollback / 100)));
+const getFullPrice = () => {
+    return screenPrice + allServicePrices;
+};
+
+
+const getTitle = () => {
+    title = title.toLowerCase().trim();
+    return title[0].toUpperCase() + title.slice(1).toLowerCase();
+};
+
+
+const getServicePercentPrices = () => {
+    return Math.ceil(fullPrice - (fullPrice * (rollback / 100)));
+};
+
+
+const showTypeOf = (variable) => {
+    console.log(typeof variable);
+    
+};
+showTypeOf(title);
+showTypeOf(fullPrice);
+showTypeOf(adaptive);
+
+allServicePrices = getAllServicePrices();
+fullPrice = getFullPrice();
+servicePercentPrice = getServicePercentPrices();
 
 if (fullPrice >= 30000) {
     console.log('Даем скидку в 10%');
@@ -40,3 +60,21 @@ if (fullPrice >= 30000) {
 } else {
     console.log('Что-то пошло не так');
 }
+
+
+
+
+
+console.log(getTitle());
+console.log(screens.toLowerCase().split(','));
+console.log(servicePercentPrice );
+
+console.log('Стоимость верстки экранов ' + screenPrice + ' рублей/ долларов/гривен/юани');
+console.log('Стоимость разработки сайта ' + fullPrice + ' рублей/ долларов/гривен/юани');
+
+
+console.log(screens.split(','));
+
+console.log('Процент отката посреднику за работу ' + (fullPrice * (rollback / 100)));
+
+
